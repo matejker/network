@@ -12,11 +12,11 @@ models are in [/network/models](./network/models).
 The Network package was developed on Python 3.6.9 and the required packages can be found in [requirements](./requirements)
 folder. To install the package from this GitHub repo using `pip`:
 ```
-pip install git+https://github.com/matejker/network.git
+pip install git+https://github.com/matejker/network.git@0.0.2
 ``` 
 
 ## Development
-Feel more that welcome to comment, commit, raise an issue, fork or push any changes. If you decide to develop be aware of 
+Feel more than welcome to comment, commit, raise an issue, fork or push any changes. If you decide to develop be aware of 
 tests in [tests](./tests). To check the code style and validation we use `lint`. Run:
 ```
 make test
