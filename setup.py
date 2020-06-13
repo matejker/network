@@ -8,8 +8,8 @@ with open("requirements/base.txt") as f:
 
 setup(
     name="mk-network",
-    version="0.0.1",
-    description="Simple pure python network package",
+    version="0.0.2",
+    description="Simple pure Python package for generating, modifying and playing with (even complex) networks.",
     author="Matej Kerekrety",
     author_email="matej.kerekrety@gmail.com",
     packages=find_packages(exclude=("tests",)),

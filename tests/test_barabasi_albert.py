@@ -1,4 +1,4 @@
-from network.barabasi_albert import BarabasiAlbert
+from network.models.barabasi_albert import BarabasiAlbert
 
 
 def test_barabasi_albert():
