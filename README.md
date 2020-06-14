@@ -9,7 +9,7 @@ The package itself lives in [/network](./network) folder where is the main *Netw
 models are in [/network/models](./network/models). 
 
 ## Installation 
-The Network package was developed on Python 3.6.9 and the required packages can be found in [requirements](./requirements)
+The Network package was developed on Python 3.6.9 and the required packages can be find in [requirements](./requirements)
 folder. To install the package from this GitHub repo using `pip`:
 ```
 pip install git+https://github.com/matejker/network.git@0.0.2
