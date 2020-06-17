@@ -1,1 +1,13 @@
-* v0.0.1 Init  
+* v0.0.3 Open doors to NetworkX 🚪
+    - Adding networkx_converter - allowing convert NetworkX.Graph() into Network() and other way around
+
+-------------------------------------------------
+
+* v0.0.2 Stable release 🎉🎉🎉
+    - let's say that it works
+
+-------------------------------------------------
+
+* v0.0.1 Init release 🎉
+    - basic functionality
+    - Network Object
