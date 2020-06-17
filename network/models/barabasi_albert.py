@@ -1,12 +1,12 @@
 from network.exceptions import BarabasiAlbertModelIncorrectInput
 from network.network import Network
+from network.models.tools import random_choice
 from itertools import combinations
 import numpy as np
 
 
 class BarabasiAlbert(Network):
-    """Barabasi-Albert is generating network models, using preferential attachment model and having power-law degree
-    distribution.
+    """Preferential attachment Barabasi-Albert model
 
     To use:
         >>> ba_model = BarabasiAlbert(5, 2)
@@ -18,29 +18,6 @@ class BarabasiAlbert(Network):
     Object attributes:
         See Network object
     """
-
-    @classmethod
-    def random_choice(cls, a, size=2):
-        """Generate a random choice of given size with no repeating.
-
-        Args:
-            a (list): a list of elements to choose from, elements can be repeated
-            size=2 (integer): size of the random set
-
-        Returns:
-            Set of random elements of given size
-
-        References:
-            .. [1] The SciPy community,
-            Numpy.random.choice,
-            https://docs.scipy.org/doc/numpy-1.15.0/reference/generated/numpy.random.choice.html
-        """
-        rc = np.random.choice(a, size).tolist()
-
-        if len(set(rc)) == len(rc):
-            return rc
-        else:
-            return cls.random_choice(a, size)
 
     @classmethod
     def model(cls, n, m, m0=None, seed=None):
@@ -85,7 +62,7 @@ class BarabasiAlbert(Network):
 
         r = m0
         while r < n:
-            connections = cls.random_choice(nodes_basket, m)
+            connections = random_choice(nodes_basket, m)
             rm = [r] * m
 
             new_edges = list(zip(rm, connections))
