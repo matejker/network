@@ -1,4 +1,6 @@
+import pytest
 from network.models.barabasi_albert import BarabasiAlbert
+from network.exceptions import BarabasiAlbertModelIncorrectInput
 
 
 def test_barabasi_albert():
@@ -18,3 +20,13 @@ def test_barabasi_albert():
     test_ba = BarabasiAlbert(10, 2, m0=5, seed=42)
 
     assert test_ba.edges_basket == edges_basket
+
+
+def test_barabasi_albert_exceptions():
+    # m0 < m
+    with pytest.raises(BarabasiAlbertModelIncorrectInput):
+        BarabasiAlbert(10, 6, 5)
+
+    # n < m0
+    with pytest.raises(BarabasiAlbertModelIncorrectInput):
+        BarabasiAlbert(1, 6, 5)
