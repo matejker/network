@@ -7,7 +7,7 @@ from copy import deepcopy
 
 
 def hierholzer(network: Network, source=0):
-    """ TODO:
+    """Algorithm for finding an Euler cycle
 
     Args:
         network (Network):
@@ -18,6 +18,15 @@ def hierholzer(network: Network, source=0):
 
     Returns:
         list of nodes that form a path visiting all edges
+
+    References:
+        .. [1] sanjeev2552, heruslu, Code_Mech,
+        Geeks For Geeks, A computer science portal for geeks
+        https://www.geeksforgeeks.org/hierholzers-algorithm-directed-graph/
+
+        .. [2] Reinhard Diestel,
+        Graph Theory,
+        Springer, Volume 173 of Graduate texts in mathematics, ISSN 0072-5285
     """
 
     path = []
