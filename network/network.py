@@ -35,6 +35,9 @@ class Network:
         Networks: an introduction,
         Oxford University Press, Oxford; New York
 
+        .. [2] Reinhard Diestel,
+        Graph Theory,
+        Springer, Volume 173 of Graduate texts in mathematics, ISSN 0072-5285
     """
 
     @staticmethod

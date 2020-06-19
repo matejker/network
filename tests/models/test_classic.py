@@ -1,4 +1,4 @@
-from network.models.classic import *
+from network.models.classic import CompleteNetwork
 
 
 def test_complete_network():

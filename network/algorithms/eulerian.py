@@ -1,5 +1,5 @@
 from network.network import Network
-from network.algorithms.exceptions import NotEulerianNetwork
+from network.algorithms.exceptions import NotEulerianNetwork, NotNetworkNode
 from copy import deepcopy
 
 # A connected graph has an Euler cycle if and only if every vertex has even degree.
@@ -11,10 +11,11 @@ def hierholzer(network: Network, source=0):
 
     Args:
         network (Network):
-        source=0 (int): node where starts (and ends) the path
+        source(int): node where starts (and ends) the path
 
     Raises:
         NotEulerianNetwork: if exists at least one node with odd degree
+        NotNetworkNode: if source is not in the network
 
     Returns:
         list of nodes that form a path visiting all edges
@@ -29,6 +30,9 @@ def hierholzer(network: Network, source=0):
         Springer, Volume 173 of Graduate texts in mathematics, ISSN 0072-5285
     """
 
+    if source > network.n:
+        raise NotNetworkNode(f'Source node {source} is not in the network (N={network.n})')
+
     path = []
     temp_path = []
     degrees_list = deepcopy(network.degrees_list)
@@ -41,7 +45,6 @@ def hierholzer(network: Network, source=0):
         odd_degree_nodes = [{'node': n, 'out_degree': d, 'in_degree': in_degree[n]} for n, d in enumerate(out_degree) if d != in_degree[n]]  # noqa
     else:
         odd_degree_nodes = [{'node': n, 'degree': d} for n, d in enumerate(network.degrees_list) if d % 2 == 1]
-
 
     if len(odd_degree_nodes) > 0:
         raise NotEulerianNetwork(f'Network is not Eulerian, not all nodes are even degree: {odd_degree_nodes}')
