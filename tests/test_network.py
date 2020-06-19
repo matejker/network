@@ -36,3 +36,8 @@ def test_network_class():
     assert (test_network.degree_bin_edges == expected_degree_bin_edges).all()
     assert test_network.edges_basket == expected_edges_basket
     assert test_network.mean_degree == expected_mean_degree
+
+
+def test_directed_network():
+    # TODO: finish the tests
+    pass

@@ -7,7 +7,7 @@ from copy import deepcopy
 
 
 def hierholzer(network: Network, source=0):
-    """Algorithm for finding an Euler cycle
+    """Hierholzer's algorithm for finding an Euler cycle
 
     Args:
         network (Network):
@@ -33,11 +33,15 @@ def hierholzer(network: Network, source=0):
     temp_path = []
     degrees_list = deepcopy(network.degrees_list)
     edges_basket = deepcopy(network.edges_basket)
-
     if network.n == 0:
         return path
 
-    odd_degree_nodes = [{'node': n, 'degree': d} for n, d in enumerate(network.degrees_list) if d % 2 == 1]
+    if network.directed:
+        out_degree, in_degree = network.directed_degrees()
+        odd_degree_nodes = [{'node': n, 'out_degree': d, 'in_degree': in_degree[n]} for n, d in enumerate(out_degree) if d != in_degree[n]]  # noqa
+    else:
+        odd_degree_nodes = [{'node': n, 'degree': d} for n, d in enumerate(network.degrees_list) if d % 2 == 1]
+
 
     if len(odd_degree_nodes) > 0:
         raise NotEulerianNetwork(f'Network is not Eulerian, not all nodes are even degree: {odd_degree_nodes}')
@@ -51,16 +55,21 @@ def hierholzer(network: Network, source=0):
             next_node = edges_basket[temp_node][-1]
 
             degrees_list[temp_node] -= 1
-            degrees_list[next_node] -= 1
-
             edges_basket[temp_node].pop()
-            i = edges_basket[next_node].index(temp_node)
-            del edges_basket[next_node][i]
+
+            if not network.directed:
+                degrees_list[next_node] -= 1
+                i = edges_basket[next_node].index(temp_node)
+                del edges_basket[next_node][i]
 
             temp_node = next_node
         else:
             path.append(temp_node)
             temp_node = temp_path[-1]
             temp_path.pop()
+
+    # If the network is directed we will revert the path
+    if network.directed:
+        return path[::-1]
 
     return path

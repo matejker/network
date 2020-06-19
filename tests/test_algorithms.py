@@ -8,7 +8,7 @@ def test_hierholzer():
     four_cycle_network = Network(4, [(0, 1), (1, 2), (2, 3), (3, 0)])  # a 4-circle
 
     assert hierholzer(four_cycle_network) == [0, 1, 2, 3, 0]
-    assert hierholzer(four_cycle_network, 2) == [2, 1, 0, 3, 2]
+    assert hierholzer(four_cycle_network, 2) == [2, 1, 0, 3, 2]  # Starting from 2 node
 
     two_roof_house = Network(6, [(0, 1), (0, 2), (0, 3), (0, 5), (1, 2), (1, 3), (1, 5), (2, 3), (2, 4), (3, 4)])
 
@@ -20,3 +20,8 @@ def test_hierholzer_non_eulerian_network():
 
     with pytest.raises(NotEulerianNetwork):
         hierholzer(non_eulerian_network)
+
+
+def test_hierholzer_directed_network():
+    four_cycle_network = Network(4, [(0, 1), (1, 2), (2, 3), (3, 0)], directed=True)  # a 4-circle
+    assert hierholzer(four_cycle_network) == [0, 1, 2, 3, 0]

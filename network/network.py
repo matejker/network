@@ -38,33 +38,37 @@ class Network:
     """
 
     @staticmethod
-    def get_edge_basket(n, edges, edge_basket=None):
+    def get_edge_basket(n, edges, edge_basket=None, directed=False, reverse=False):
         """Converts list of edges (tuples) into list of node's neighbors
 
         Args:
             n (int): number of nodes
             edges (list): list of edges (tuples)
-            edge_basket=None (list): list of node's neighbors
+            edge_basket (list): list of node's neighbors
+            directed (boolean): if the network is directed
+            reverse (boolean): if True will reverse the edges (e.g. (0, 1) to (1, 0))
 
         Returns:
             edge_basket (list): list of node's neighbors
         """
         edges_basket = edge_basket or [[] for _ in range(n)]
 
-        for e in edges:
-            i = e[0]
-            j = e[1]
+        for v, u in edges:
+            if reverse and directed:
+                v, u = u, v
 
-            edges_basket[i].append(j)
-            edges_basket[j].append(i)
+            edges_basket[v].append(u)
+            if not directed:
+                edges_basket[u].append(v)
 
         return edges_basket
 
-    def __init__(self, n, edges, edge_basket=None):
+    def __init__(self, n, edges, edge_basket=None, directed=False):
         self.n = n
         self.edges = edges
+        self.directed = directed
 
-        self.edges_basket = edge_basket or self.get_edge_basket(n, edges)
+        self.edges_basket = edge_basket or self.get_edge_basket(n, edges, directed=directed)
 
         self.degrees_list = [len(_) for _ in self.edges_basket]
 
@@ -107,3 +111,17 @@ class Network:
         self.degree_bin_edges = bin_edges[:-1]
 
         return degree_distribution, bin_edges[:-1]
+
+    def directed_degrees(self):
+        """However, degrees_list holds info about out-degree values (or both for undirected networks), this function
+        return out-degree and in-degree for each node
+
+        Returns:
+             (tuple): a tuple of two lists denoting out-degree and in-degree
+        """
+        out_degree = self.degrees_list
+        in_coming_edges_basket = self.get_edge_basket(self.n, self.edges, reverse=True, directed=True)
+
+        in_degree = [len(_) for _ in in_coming_edges_basket]
+
+        return out_degree, in_degree

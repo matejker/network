@@ -33,4 +33,7 @@ def networkx2network(graph):
     n = len(graph.nodes())
     edges = list(graph.edges())
 
+    # TODO: in Graph nodes do not have be integers mapping from 0 to n
+    # TODO: add mapping for edges and nodes to 0 - n
+
     return Network(n, edges)

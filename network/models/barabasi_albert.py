@@ -74,6 +74,6 @@ class BarabasiAlbert(Network):
 
         return edges
 
-    def __init__(self, n, m, m0=None, seed=None):
+    def __init__(self, n, m, m0=None, seed=None, **kwargs):
         edges = self.model(n, m, m0, seed)
-        super().__init__(n, edges)
+        super().__init__(n, edges, **kwargs)
