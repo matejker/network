@@ -6,11 +6,30 @@ from copy import deepcopy
 # ~ Euler
 
 
+def is_eulerian(network: Network):
+    """
+
+    Args:
+        network (Network): network object
+
+    returns
+        is_eulerian (boolean): True if every vertex has even degree.
+        odd_degree_nodes (list): list if nodes with odd degree
+    """
+    if network.directed:
+        out_degree, in_degree = network.directed_degrees()
+        odd_degree_nodes = [{'node': n, 'out_degree': d, 'in_degree': in_degree[n]} for n, d in enumerate(out_degree) if d != in_degree[n]]  # noqa
+    else:
+        odd_degree_nodes = [{'node': n, 'degree': d} for n, d in enumerate(network.degrees_list) if d % 2 == 1]
+
+    return len(odd_degree_nodes) == 0, odd_degree_nodes
+
+
 def hierholzer(network: Network, source=0):
     """Hierholzer's algorithm for finding an Euler cycle
 
     Args:
-        network (Network):
+        network (Network): network object
         source(int): node where starts (and ends) the path
 
     Raises:
@@ -40,13 +59,8 @@ def hierholzer(network: Network, source=0):
     if network.n == 0:
         return path
 
-    if network.directed:
-        out_degree, in_degree = network.directed_degrees()
-        odd_degree_nodes = [{'node': n, 'out_degree': d, 'in_degree': in_degree[n]} for n, d in enumerate(out_degree) if d != in_degree[n]]  # noqa
-    else:
-        odd_degree_nodes = [{'node': n, 'degree': d} for n, d in enumerate(network.degrees_list) if d % 2 == 1]
-
-    if len(odd_degree_nodes) > 0:
+    eulerian, odd_degree_nodes = is_eulerian(network)
+    if not eulerian:
         raise NotEulerianNetwork(f'Network is not Eulerian, not all nodes are even degree: {odd_degree_nodes}')
 
     temp_path.append(source)

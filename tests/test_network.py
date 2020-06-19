@@ -29,6 +29,7 @@ def test_network_class():
     ]
     expected_mean_degree = 3.4
 
+    # Generating degree_distribution
     test_network.get_degree_distribution()
 
     assert test_network.degrees_list == expected_degrees_list
@@ -41,3 +42,9 @@ def test_network_class():
 def test_directed_network():
     # TODO: finish the tests
     pass
+
+
+def test_weighted_network():
+    weighted_network = Network(3, [(0, 1, 5), (0, 2), (2, 1, 3)], weighted=True)
+
+    assert weighted_network.edges == [(0, 1, 5), (2, 1, 3), (0, 2, 1)]

@@ -41,7 +41,7 @@ class Network:
     """
 
     @staticmethod
-    def get_edge_basket(n, edges, edge_basket=None, directed=False, reverse=False):
+    def get_edge_basket(n, edges, edge_basket=None, directed=False, reverse=False, weighted=False):
         """Converts list of edges (tuples) into list of node's neighbors
 
         Args:
@@ -50,11 +50,15 @@ class Network:
             edge_basket (list): list of node's neighbors
             directed (boolean): if the network is directed
             reverse (boolean): if True will reverse the edges (e.g. (0, 1) to (1, 0))
+            weighted (boolean): if the network is weighted
 
         Returns:
             edge_basket (list): list of node's neighbors
         """
         edges_basket = edge_basket or [[] for _ in range(n)]
+
+        # Removing weights for weighted network
+        edges = [(v, u) for v, u, w in edges] if weighted else edges
 
         for v, u in edges:
             if reverse and directed:
@@ -66,12 +70,19 @@ class Network:
 
         return edges_basket
 
-    def __init__(self, n, edges, edge_basket=None, directed=False):
+    def __init__(self, n, edges, edge_basket=None, directed=False, weighted=False):
         self.n = n
-        self.edges = edges
         self.directed = directed
+        self.weighted = weighted
 
-        self.edges_basket = edge_basket or self.get_edge_basket(n, edges, directed=directed)
+        # Sanitise weighted edges with no weights, default weight is 1
+        if weighted:
+            self.edges = [e for e in edges if len(e) == 3]
+            self.edges.extend([(e[0], e[1], 1) for e in edges if len(e) == 2])
+        else:
+            self.edges = edges
+
+        self.edges_basket = edge_basket or self.get_edge_basket(n, self.edges, directed=directed, weighted=weighted)
 
         self.degrees_list = [len(_) for _ in self.edges_basket]
 
@@ -83,8 +94,8 @@ class Network:
         """Determines the network's degree distribution on both linear or logarithmic scale
 
         Args:
-            log=False (boolean): Using the logarithmic scale
-            density=True (boolean): Returning distribution over the cumulative values (histogram)
+            log (boolean): Using the logarithmic scale
+            density (boolean): Returning distribution over the cumulative values (histogram)
 
         Returns:
             degree_distribution (list): degree distribution (or histogram over node degrees)
@@ -96,7 +107,6 @@ class Network:
             (array([0.66666667, 0.33333333]), array([1, 2]))
             >>> network.degree_distribution
             array([0.66666667, 0.33333333])
-
 
         Warning:
             degree_distribution and degree_bin_edges are not in Network.__init__, they are intentionally determined
@@ -120,11 +130,18 @@ class Network:
         return out-degree and in-degree for each node
 
         Returns:
-             (tuple): a tuple of two lists denoting out-degree and in-degree
+            (tuple): a tuple of two lists denoting out-degree and in-degree
+
+        Warning:
+            in_degrees_list, in_k_min and in_k_max are not in Network.__init__, they are intentionally determined
+            after running Network.directed_degrees()!
         """
         out_degree = self.degrees_list
         in_coming_edges_basket = self.get_edge_basket(self.n, self.edges, reverse=True, directed=True)
 
         in_degree = [len(_) for _ in in_coming_edges_basket]
+        self.in_degrees_list = in_degree
+        self.in_k_min = min(in_degree) if self.n > 0 else 0
+        self.in_k_max = max(in_degree) if self.n > 0 else 0
 
         return out_degree, in_degree
