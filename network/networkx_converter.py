@@ -51,4 +51,3 @@ def networkx2network(graph):
         edges = [(nodes.index(v), nodes.index(u)) for v, u in graph.edges()]
 
     return Network(n, edges, directed=directed, weighted=weighted)
-

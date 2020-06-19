@@ -4,3 +4,7 @@ class NotEulerianNetwork(Exception):
 
 class NotNetworkNode(Exception):
     pass
+
+
+class SourceTargetNotConnected(Exception):
+    pass
