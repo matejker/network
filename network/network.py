@@ -73,8 +73,8 @@ class Network:
         self.degrees_list = [len(_) for _ in self.edges_basket]
 
         self.mean_degree = np.mean(self.degrees_list)  # TODO: think about powerlaw
-        self.k_min = min(self.degrees_list)
-        self.k_max = max(self.degrees_list)
+        self.k_min = min(self.degrees_list) if n > 0 else 0
+        self.k_max = max(self.degrees_list) if n > 0 else 0
 
     def get_degree_distribution(self, log=False, density=True):  # TODO: think about powerlaw
         """Determines the network's degree distribution on both linear or logarithmic scale

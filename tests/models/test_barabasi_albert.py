@@ -1,6 +1,6 @@
 import pytest
 from network.models.barabasi_albert import BarabasiAlbert
-from network.exceptions import BarabasiAlbertModelIncorrectInput
+from network.models.exceptions import BarabasiAlbertModelIncorrectInput
 
 
 def test_barabasi_albert():
