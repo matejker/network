@@ -1,6 +1,6 @@
-from network.exceptions import BarabasiAlbertModelIncorrectInput
+from network.models.exceptions import BarabasiAlbertModelIncorrectInput
 from network.network import Network
-from network.models.tools import random_choice
+from network.tools import random_choice
 from itertools import combinations
 import numpy as np
 
@@ -74,6 +74,6 @@ class BarabasiAlbert(Network):
 
         return edges
 
-    def __init__(self, n, m, m0=None, seed=None):
+    def __init__(self, n, m, m0=None, seed=None, **kwargs):
         edges = self.model(n, m, m0, seed)
-        super().__init__(n, edges)
+        super().__init__(n, edges, **kwargs)

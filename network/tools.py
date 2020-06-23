@@ -1,4 +1,5 @@
 import numpy as np
+from network import Network
 
 
 def random_choice(seq, size=2):
@@ -27,3 +28,20 @@ def random_choice(seq, size=2):
         targets.add(x)
 
     return list(targets)
+
+
+def weighted_edges_dict(network: Network):
+    weighted_edges = {}
+    directed = network.directed
+    for e in network.edges:
+        if len(e) == 3:
+            v, u, w = e
+        else:
+            v, u = e
+            w = 1
+
+        weighted_edges[v, u] = w
+        if not directed:
+            weighted_edges[u, v] = w
+
+    return weighted_edges
