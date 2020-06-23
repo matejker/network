@@ -1,3 +1,11 @@
+* v0.0.4 Algorithms and concepts of weighted and directed graphs 🏋️💻
+    - Adding Dijkstra's algorithm - shortest path
+    - Hierholzer's algorithm - find the Eulerian path
+    - Directed networks
+    - Weighted networks
+
+-------------------------------------------------
+
 * v0.0.3 Open doors to NetworkX 🚪
     - Adding networkx_converter - allowing convert NetworkX.Graph() into Network() and other way around
 
