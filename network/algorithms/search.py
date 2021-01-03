@@ -1,6 +1,7 @@
 from network.network import Network
 from network.algorithms.exceptions import NotNetworkNode
 
+
 def dfs(network: Network, source: int):
     """ Depth First Search
 

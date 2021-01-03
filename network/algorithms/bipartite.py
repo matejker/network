@@ -5,6 +5,14 @@ from network.network import Network
 
 
 def get_bipartite_sets(network: Network):
+    """ Finds (possible) edge sets of a bipartite graph
+
+    Args:
+        network (Network): network object
+
+    Returns:
+         edge sets, otherwise False
+    """
     def opposite_color(color: int):
         return (color + 1) % 2
 
@@ -30,4 +38,12 @@ def get_bipartite_sets(network: Network):
 
 
 def is_bipartite(network: Network):
-    return get_bipartite_sets(network) != False
+    """ Checks if network is bipartite
+
+    Args:
+        network (Network): network object
+
+    Returns:
+        True if bipartite, otherwise False
+    """
+    return get_bipartite_sets(network) != False  # noqa

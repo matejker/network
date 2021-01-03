@@ -15,21 +15,25 @@ folder. To install the package from this GitHub repo using `pip`:
 pip install git+https://github.com/matejker/network.git@0.0.2
 ``` 
 
-## Development
-Feel more than welcome to comment, commit, raise an issue, fork or push any changes. If you decide to develop be aware of 
-tests in [tests](./tests). To check the code style and validation we use `lint`. Run:
-```
-make test
-make lint
-```
-To install requirements run:
-```
-pip install -r ./requirements/base.txt
-pip install -r ./requirements/tools.txt
-pip install -r ./requirements/test.txt
+## Usage
+Feel more that free to use, modify and copy the code, just follow the [licence](./LICENSE.txt) and cite it:
+
+```tex
+@misc{Kerekrety2020,
+  author = {Kerekrety, M},
+  title = {Network},
+  year = {2020},
+  publisher = {GitHub},
+  journal = {GitHub repository},
+  howpublished = {\url{https://github.com/matejker/network}}
+}
 ```
 
 ## References
-[1] Newman, M. E. J. (2010),
-Networks: an introduction,
-Oxford University Press, Oxford; New York
+[1] Newman, M. E. J. (2010), _Networks: an introduction_, Oxford University Press, Oxford; New York  
+[2] Diestel, R. (2002), _Graph Theory_, Springer, Volume 173 of Graduate texts in mathematics, ISSN 0072-5285  
+[3] Geeks For Geeks, A computer science portal for geeks, _Depth First Search or DFS for a Graph_, 
+https://www.geeksforgeeks.org/depth-first-search-or-dfs-for-a-graph/  
+[4] Geeks For Geeks, A computer science portal for geeks, _Breadth First Search or BFS for a Graph_, 
+https://www.geeksforgeeks.org/breadth-first-search-or-bfs-for-a-graph/  
+[5] 
