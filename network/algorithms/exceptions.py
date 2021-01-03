@@ -1,10 +1,17 @@
-class NotEulerianNetwork(Exception):
+from network.network import NetworkException
+
+
+class NotEulerianNetwork(NetworkException):
     pass
 
 
-class NotNetworkNode(Exception):
+class NotNetworkNode(NetworkException):
     pass
 
 
-class SourceTargetNotConnected(Exception):
+class SourceTargetNotConnected(NetworkException):
+    pass
+
+
+class NetworkIsNotBipartite(NetworkException):
     pass

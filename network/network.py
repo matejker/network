@@ -1,6 +1,10 @@
 import numpy as np
 
 
+class NetworkException(Exception):
+    pass
+
+
 class Network:
     """Generic framework for network objects.
 
