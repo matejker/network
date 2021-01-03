@@ -7,7 +7,7 @@ from copy import deepcopy
 
 
 def is_eulerian(network: Network):
-    """
+    """ Checks if the network is Eulerian
 
     Args:
         network (Network): network object
@@ -18,15 +18,18 @@ def is_eulerian(network: Network):
     """
     if network.directed:
         out_degree, in_degree = network.directed_degrees()
-        odd_degree_nodes = [{'node': n, 'out_degree': d, 'in_degree': in_degree[n]} for n, d in enumerate(out_degree) if d != in_degree[n]]  # noqa
+        odd_degree_nodes = [
+            {"node": n, "out_degree": d, "in_degree": in_degree[n]}
+            for n, d in enumerate(out_degree) if d != in_degree[n]
+        ]
     else:
-        odd_degree_nodes = [{'node': n, 'degree': d} for n, d in enumerate(network.degrees_list) if d % 2 == 1]
+        odd_degree_nodes = [{"node": n, "degree": d} for n, d in enumerate(network.degrees_list) if d % 2 == 1]
 
     return len(odd_degree_nodes) == 0, odd_degree_nodes
 
 
 def hierholzer(network: Network, source=0):
-    """Hierholzer's algorithm for finding an Euler cycle
+    """ Hierholzer"s algorithm for finding an Euler cycle
 
     Args:
         network (Network): network object
@@ -50,7 +53,7 @@ def hierholzer(network: Network, source=0):
     """
 
     if source > network.n:
-        raise NotNetworkNode(f'Source node {source} is not in the network (N={network.n})')
+        raise NotNetworkNode(f"Source node {source} is not in the network (N={network.n})")
 
     path = []
     temp_path = []
@@ -61,7 +64,7 @@ def hierholzer(network: Network, source=0):
 
     eulerian, odd_degree_nodes = is_eulerian(network)
     if not eulerian:
-        raise NotEulerianNetwork(f'Network is not Eulerian, not all nodes are even degree: {odd_degree_nodes}')
+        raise NotEulerianNetwork(f"Network is not Eulerian, not all nodes are even degree: {odd_degree_nodes}")
 
     temp_path.append(source)
     temp_node = source
