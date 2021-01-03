@@ -11,7 +11,7 @@ def dfs(network: Network, source: int):
         NotNetworkNode: if source is not in the network
 
     Returns:
-        list of nodes that form a sorted spanning tree
+        list of nodes that form a sorted (Depth First Search) spanning tree
 
     References:
         .. [1] Geeks For Geeks, A computer science portal for geeks,
@@ -26,17 +26,50 @@ def dfs(network: Network, source: int):
     if source > network.n:
         raise NotNetworkNode(f"Source node {source} is not in the network (N={network.n})")
 
-    def _dfs(_visited, _node):
-        _visited.append(_node)
+    def _dfs(visited, node):
+        visited.append(node)
 
-        for neighbour in sorted(network.edges_basket[_node]):
-            if neighbour not in _visited:
-                _visited = _dfs(_visited, neighbour)
+        for neighbour in sorted(network.edges_basket[node]):
+            if neighbour not in visited:
+                visited = _dfs(visited, neighbour)
 
-        return _visited
+        return visited
 
     return _dfs([], source)
 
 
+def bfs(network: Network, source: int):
+    """ Breadth First Search
 
+    Args:
+        network (Network): network object
+        source(int): node where starts (and ends) the path
+    Raises:
+        NotNetworkNode: if source is not in the network
 
+    Returns:
+        list of nodes that form a sorted (Breadth First Search) spanning tree
+
+    References:
+        .. [1] Geeks For Geeks, A computer science portal for geeks,
+        Breadth First Search or BFS for a Graph
+        https://www.geeksforgeeks.org/breadth-first-search-or-bfs-for-a-graph/
+
+        .. [2] Reinhard Diestel,
+        Graph Theory,
+        Springer, Volume 173 of Graduate texts in mathematics, ISSN 0072-5285
+    """
+    if source > network.n:
+        raise NotNetworkNode(f"Source node {source} is not in the network (N={network.n})")
+
+    visited = []
+    queue = [source]
+    while queue:
+        node = queue.pop(0)
+        visited.append(node)
+
+        for neighbour in sorted(network.edges_basket[node]):
+            if neighbour not in visited:
+                queue.append(neighbour)
+
+    return visited
