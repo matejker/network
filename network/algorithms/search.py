@@ -74,7 +74,8 @@ def bfs(network: Network, source: int):
     queue = deque([source])
     while queue:
         node = queue.popleft()
-        visited.append(node)
+        if node not in visited:
+            visited.append(node)
 
         for neighbour in sorted(network.edges_basket[node]):
             if neighbour not in visited:
