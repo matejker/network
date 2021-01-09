@@ -1,5 +1,12 @@
+from collections import deque
+
 from network.network import Network
 from network.algorithms.exceptions import NotNetworkNode
+
+
+__all__ = ["dfs", "bfs"]
+
+# Basic idea: https://xkcd.com/2407
 
 
 def dfs(network: Network, source: int):
@@ -64,9 +71,9 @@ def bfs(network: Network, source: int):
         raise NotNetworkNode(f"Source node {source} is not in the network (N={network.n})")
 
     visited = []
-    queue = [source]
+    queue = deque([source])
     while queue:
-        node = queue.pop(0)
+        node = queue.popleft()
         visited.append(node)
 
         for neighbour in sorted(network.edges_basket[node]):

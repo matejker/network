@@ -5,7 +5,7 @@ meant to run smoothly for stochastic simulations on networks, unlike a famous [N
 package.
 
 ## Structure
-The package itself lives in [/network](./network) folder where is the main *Network* object. All generative network 
+The package itself lives in [/network](./network) folder where is the main _Network_ object. All generative network 
 models are in [/network/models](./network/models). 
 
 ## Installation 
@@ -32,8 +32,6 @@ Feel more that free to use, modify and copy the code, just follow the [licence](
 ## References
 [1] Newman, M. E. J. (2010), _Networks: an introduction_, Oxford University Press, Oxford; New York  
 [2] Diestel, R. (2002), _Graph Theory_, Springer, Volume 173 of Graduate texts in mathematics, ISSN 0072-5285  
-[3] Geeks For Geeks, A computer science portal for geeks, _Depth First Search or DFS for a Graph_, 
-https://www.geeksforgeeks.org/depth-first-search-or-dfs-for-a-graph/  
-[4] Geeks For Geeks, A computer science portal for geeks, _Breadth First Search or BFS for a Graph_, 
-https://www.geeksforgeeks.org/breadth-first-search-or-bfs-for-a-graph/  
-[5] 
+[3] Geeks For Geeks, A computer science portal for geeks, https://www.geeksforgeeks.org/  
+[4] Hopcroft, J. E. and Karp, R. M. (1973), _An n^{5 / 2} Algorithm for Maximum Matchings in Bipartite Graphs_,
+    SIAM Journal of Computing 2.4, pp. 225--231. <https://doi.org/10.1137/0202019>  

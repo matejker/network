@@ -5,7 +5,7 @@ from network.tools import weighted_edges_dict
 
 
 def dijkstra(network: Network, source: int, target: int):
-    """Dijkstra's algorithm for finding the shortest path in the network
+    """Dijkstra"s algorithm for finding the shortest path in the network
 
     Args:
         network (Network): Network object, both wighted and unweighted
@@ -20,10 +20,10 @@ def dijkstra(network: Network, source: int, target: int):
         shortest path in the network, starting in source and ending in target
     """
     if source > network.n:
-        raise NotNetworkNode(f'Source node {source} is not in the network (N={network.n})')
+        raise NotNetworkNode(f"Source node {source} is not in the network (N={network.n})")
 
     if target > network.n:
-        raise NotNetworkNode(f'Target node {target} is not in the network (N={network.n})')
+        raise NotNetworkNode(f"Target node {target} is not in the network (N={network.n})")
 
     path = []
     if source == target:
@@ -32,7 +32,7 @@ def dijkstra(network: Network, source: int, target: int):
     # Get weighted edges, when network is unweighted then every edge has weight 1, having (v, u, w) format
     weighted_edges = weighted_edges_dict(network)
 
-    dist = {n: float('Inf') for n in range(network.n)}
+    dist = {n: float("Inf") for n in range(network.n)}
     prev = {n: None for n in range(network.n)}
     queue = set(range(network.n))
 
@@ -66,6 +66,6 @@ def dijkstra(network: Network, source: int, target: int):
         m -= 1
 
     if m == 0:
-        raise SourceTargetNotConnected(f'Source {source} is not connected with {target}')
+        raise SourceTargetNotConnected(f"Source {source} is not connected with {target}")
 
     return path, dist[target]
