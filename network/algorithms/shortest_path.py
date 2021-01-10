@@ -3,9 +3,11 @@ from .exceptions import NotNetworkNode, SourceTargetNotConnected
 from heapq import heappop, heapify
 from network.tools import weighted_edges_dict
 
+__all__ = ["dijkstra"]
+
 
 def dijkstra(network: Network, source: int, target: int):
-    """Dijkstra"s algorithm for finding the shortest path in the network
+    """Dijkstra's algorithm for finding the shortest path in the network
 
     Args:
         network (Network): Network object, both wighted and unweighted
