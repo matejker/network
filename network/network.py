@@ -1,5 +1,11 @@
 import numpy as np
 
+__all__ = ["NetworkException", "Network"]
+
+
+class NetworkException(Exception):
+    pass
+
 
 class Network:
     """Generic framework for network objects.

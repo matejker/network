@@ -1,2 +1,2 @@
-from .network import Network  # noqa
-from .networkx_converter import network2networkx, networkx2network # noqa
+from .network import *  # noqa
+from .networkx_converter import *  # noqa
