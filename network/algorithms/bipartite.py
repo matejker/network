@@ -27,16 +27,12 @@ def get_bipartite_sets(network: Network):
     for node in range(network.n):
         if colors[node] != -1 or len(network.edges_basket[node]) == 0:
             continue
-
         color_sets[0].add(node)
         colors[node] = 0
         queue = [node]
-
         while queue:
-
             n = queue.pop()
             neighbour_color = opposite_color(colors[n])
-
             for neighbour in network.edges_basket[n]:
                 if colors[neighbour] == -1:
                     colors[neighbour] = neighbour_color
@@ -44,7 +40,6 @@ def get_bipartite_sets(network: Network):
                     queue.append(neighbour)
                 if colors[neighbour] == colors[n]:
                     return False
-
     return color_sets
 
 

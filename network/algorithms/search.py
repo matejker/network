@@ -3,7 +3,6 @@ from collections import deque
 from network.network import Network
 from network.algorithms.exceptions import NotNetworkNode
 
-
 __all__ = ["dfs", "bfs"]
 
 # Basic idea: https://xkcd.com/2407

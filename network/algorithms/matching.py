@@ -70,7 +70,6 @@ def hopcroft_karp(network: Network, one_layer=True):
             if a_matches[v] is None:
                 _dfs(v)
 
-    # Strip the entries matched to `None`.
     a_matches = [(k, v) for k, v in a_matches.items() if v is not None]
     b_matches = [(k, v) for k, v in b_matches.items() if v is not None]
 

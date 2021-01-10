@@ -5,6 +5,8 @@ from copy import deepcopy
 # A connected graph has an Euler cycle if and only if every vertex has even degree.
 # ~ Euler
 
+__all__ = ["is_eulerian", "hierholzer"]
+
 
 def is_eulerian(network: Network):
     """ Checks if the network is Eulerian
@@ -29,7 +31,7 @@ def is_eulerian(network: Network):
 
 
 def hierholzer(network: Network, source=0):
-    """ Hierholzer"s algorithm for finding an Euler cycle
+    """ Hierholzer's algorithm for finding an Euler cycle
 
     Args:
         network (Network): network object

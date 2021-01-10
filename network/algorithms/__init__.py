@@ -1,6 +1,6 @@
-from .eulerian import hierholzer, is_eulerian  # noqa
+from .eulerian import *  # noqa
 from .bipartite import *  # noqa
-from .shortest_path import dijkstra  # noqa
+from .shortest_path import *  # noqa
 from .search import *  # noqa
 from .matching import *  # noqa
 from .exceptions import *  # noqa
