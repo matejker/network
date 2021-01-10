@@ -1,6 +1,8 @@
 import networkx as nx
 from network import Network
 
+__all__ = ["network2networkx", "networkx2network"]
+
 
 def network2networkx(network):
     """Converts Network into networkx.Graph()

@@ -1,79 +1,77 @@
 from collections import deque
 
-
 from network.network import Network
 from network.algorithms.bipartite import is_bipartite, get_bipartite_sets
 from network.algorithms.exceptions import NetworkIsNotBipartite
 
+__all__ = ["hopcroft_karp"]
 
-def hopcroft_karp(network: Network):
-    """ Hopcroft-Karp
+INFINITY = float("inf")
+
+
+def hopcroft_karp(network: Network, one_layer=True):
+    """ Hopcroft-Karp - maximum cardinality matching on bipartite network. The algorithm was originally published by
+    Hopcroft and Karp in 1973 [1], but in this case we implemented solution from Wikipedia [2].
 
     References:
         .. [1] John E. Hopcroft and Richard M. Karp. (1973),
         "An n^{5 / 2} Algorithm for Maximum Matchings in Bipartite Graphs",
          SIAM Journal of Computing 2.4, pp. 225--231. <https://doi.org/10.1137/0202019>.
+        .. [2] Wikimedia, Hopcroft–Karp algorithm,
+        https://en.wikipedia.org/wiki/Hopcroft%E2%80%93Karp_algorithm#Pseudocode
+        .. [3] Sofiat Olaosebikan (2015),  Python Implementation of HopcroftKarp's Algorithm
+        https://github.com/sofiatolaosebikan/hopcroftkarp
     """
 
     if not is_bipartite(network):
         raise NetworkIsNotBipartite("Network is not bipartite, you can not run Hopcroft-Karp on non bipartite networks")
 
     # A matching M is maximum iff there is no augmenting path.
-    # https://stackoverflow.com/questions/4697228/hopcroft-karp-algorithm-in-python
+
+    layer_a, layer_b = get_bipartite_sets(network)
+    a_matches = {v: None for v in layer_a}
+    b_matches = {v: None for v in layer_b}
+    dist = {}
+    queue = deque()
 
     def _bfs():
         for v in layer_a:
             if a_matches[v] is None:
-                distances[v] = 0
+                dist[v] = 0
                 queue.append(v)
             else:
-                distances[v] = float("inf")
-        distances[None] = float("inf")
+                dist[v] = INFINITY
+
+        dist[None] = INFINITY
+
         while queue:
             v = queue.popleft()
-            if distances[v] < distances[None]:
+            if dist[v] < dist[None]:
                 for u in network.edges_basket[v]:
-                    if distances[b_matches[u]] is float("Inf"):
-                        distances[b_matches[u]] = distances[v] + 1
+                    if dist[b_matches[u]] is INFINITY:
+                        dist[b_matches[u]] = dist[v] + 1
                         queue.append(b_matches[u])
-        return distances[None] is not float("inf")
+        return dist[None] is not INFINITY
 
     def _dfs(v):
         if v is not None:
             for u in network.edges_basket[v]:
-                if distances[b_matches[u]] == distances[v] + 1:
+                if dist[b_matches[u]] == dist[v] + 1:
                     if _dfs(b_matches[u]):
                         b_matches[u] = v
                         a_matches[v] = u
                         return True
-            distances[v] = float("inf")
+            dist[v] = INFINITY
             return False
         return True
 
-    # Initialize the "global" variables that maintain state during the search.
-    layer_a, layer_b = get_bipartite_sets(network)
-    a_matches = {v: None for v in layer_a}
-    b_matches = {v: None for v in layer_b}
-    distances = {}
-    queue = deque()
-
-    # Implementation note: this counter is incremented as pairs are matched but
-    # it is currently not used elsewhere in the computation.
-    num_matched_pairs = 0
     while _bfs():
         for v in layer_a:
             if a_matches[v] is None:
-                if _dfs(v):
-                    num_matched_pairs += 1
+                _dfs(v)
 
     # Strip the entries matched to `None`.
-    a_matches = {k: v for k, v in a_matches.items() if v is not None}
-    b_matches = {k: v for k, v in b_matches.items() if v is not None}
+    a_matches = [(k, v) for k, v in a_matches.items() if v is not None]
+    b_matches = [(k, v) for k, v in b_matches.items() if v is not None]
 
-    # At this point, the left matches and the right matches are inverses of one
-    # another. In other words,
-    #
-    #     leftmatches == {v, k for k, v in rightmatches.items()}
-    #
-    # Finally, we combine both the left matches and right matches.
-    return a_matches.items(), b_matches.items()
+    return a_matches if one_layer else (a_matches, b_matches)

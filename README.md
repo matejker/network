@@ -35,3 +35,5 @@ Feel more that free to use, modify and copy the code, just follow the [licence](
 [3] Geeks For Geeks, A computer science portal for geeks, https://www.geeksforgeeks.org/  
 [4] Hopcroft, J. E. and Karp, R. M. (1973), _An n^{5 / 2} Algorithm for Maximum Matchings in Bipartite Graphs_,
     SIAM Journal of Computing 2.4, pp. 225--231. <https://doi.org/10.1137/0202019>  
+[5] Cormen, T. H. et. al. (2001). _Introduction to algorithms._ Cambridge, Mass: MIT Press.  
+[6] Dasgupta, S., Papadimitriou, Ch. C., and Vazirani, U. (2006), _Algorithms_, McGraw-Hill, Inc., USA.  

@@ -32,7 +32,7 @@ def dijkstra(network: Network, source: int, target: int):
     # Get weighted edges, when network is unweighted then every edge has weight 1, having (v, u, w) format
     weighted_edges = weighted_edges_dict(network)
 
-    dist = {n: float("Inf") for n in range(network.n)}
+    dist = {n: float("inf") for n in range(network.n)}
     prev = {n: None for n in range(network.n)}
     queue = set(range(network.n))
 
