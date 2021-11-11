@@ -1,5 +1,6 @@
 import networkx as nx
-from network import Network
+
+from .network import Network
 
 __all__ = ["network2networkx", "networkx2network"]
 

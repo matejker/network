@@ -1,5 +1,6 @@
 import numpy as np
-from network import Network
+
+from .network import Network
 
 
 def random_choice(seq, size=2):
