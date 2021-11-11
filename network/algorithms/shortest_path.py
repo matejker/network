@@ -1,6 +1,7 @@
+from heapq import heappop, heapify
+
 from network import Network
 from .exceptions import NotNetworkNode, SourceTargetNotConnected
-from heapq import heappop, heapify
 from network.tools import weighted_edges_dict
 
 __all__ = ["dijkstra"]
@@ -61,7 +62,7 @@ def dijkstra(network: Network, source: int, target: int):
     last_node = target
     m = len(weighted_edges)
 
-    # Iterate till source in the path or we visited all edges
+    # Iterate till the source is not in the path or we have visited all edges
     while source not in path and m > 0:
         path.append(last_node)
         last_node = prev[last_node]
