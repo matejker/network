@@ -5,7 +5,7 @@ description = "Simple pure Python package for generating, modifying and playing 
 authors = ["Matej Kerekrety <matej.kerekrety@gmail.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = ">=3.8.1,<4.0"
 numpy = "^1.23.5"
 networkx = "^2.8.8"
 
