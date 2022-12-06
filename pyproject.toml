@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "network"
+version = "0.2.0"
+description = "Simple pure Python package for generating, modifying and playing with (even complex) networks"
+authors = ["Matej Kerekrety <matej.kerekrety@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+numpy = "^1.23.5"
+networkx = "^2.8.8"
+
+[tool.poetry.dev-dependencies]
+pytest = "^7.2.0"
+flake8 = "^6.0.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
