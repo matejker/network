@@ -1,2 +1,2 @@
 numpy>=1.15.2
-networkx==2.4
+networkx>=2.4
