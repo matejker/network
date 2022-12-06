@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "network"
+name = "mk-network"
 version = "0.2.0"
 description = "Simple pure Python package for generating, modifying and playing with (even complex) networks"
 authors = ["Matej Kerekrety <matej.kerekrety@gmail.com>"]
