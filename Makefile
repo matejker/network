@@ -3,19 +3,16 @@
 TEST_PATH=./tests
 
 requirements:
-	pip install -r requirements/base.txt
-
-requirements_tools:
-	pip install -r requirements/tools.txt
+	poetry install --no-dev
 
 requirements_test:
-	pip install -r requirements/test.txt
+	poetry install 
 
 lint: requirements_tools
-	flake8 --exclude=env,venv
+	poetry run flake8 --exclude=env,venv
 
 test: requirements_test
 ifndef TEST_ONLY
 	TEST_ONLY=$(TEST_PATH)
 endif
-	python -m pytest -s -vv --color=yes $(TEST_ONLY)
+	poetry run  pytest -s -vv --color=yes $(TEST_ONLY)
